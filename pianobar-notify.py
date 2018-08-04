@@ -5,6 +5,8 @@ import terminal_notifier as tn
 import ntfy
 import os, sys
 
+DEBUG = False
+
 # Notify when a song starts.
 NOTIFY_SONG_START = True
 
@@ -35,7 +37,8 @@ NOTIFY_NETWORK_ERROR = True
 
 def main():
 
-    os.system("echo \"{}\" > /Users/smeijer/.config/pianobar/test.txt\n".format(sys.argv))
+    if(DEBUG):
+        os.system("echo \"{}\" > /Users/$USER/.config/pianobar/test.txt\n".format(sys.argv))
 
     notification_type = parse_input_type()
 
@@ -115,9 +118,9 @@ class Pianobar_Notifier():
         self.title = self.info['title']
         self.album = self.info['album']
         self.image_url = self.info['coverArt']
-        try:
-            self.station = self.info['songStationName']
-        except KeyError:
+
+        self.station = self.info['songStationName']
+        if(self.station == '' or self.station.isspace() ):
             self.station = self.info['stationName']
         
         try:
@@ -132,14 +135,17 @@ class Pianobar_Notifier():
         """
 
         for line in sys.stdin:
-            os.system("echo \"{}\" >> /Users/smeijer/.config/pianobar/test3.txt\n".format(line))
+            if(DEBUG):
+                os.system("echo \"{}\" >> /Users/$USER/.config/pianobar/test3.txt\n".format(line))
             key, delimiter, value = str(line).strip().partition(u'=')
             if value.isdigit():
                 self.info[key] = int(value)
             else:
                 self.info[key] = value
         
-        os.system("echo \"{}\" > /Users/smeijer/.config/pianobar/test2.txt\n".format(self.info))
+        if(DEBUG):
+            os.system("echo \"{}\" > /Users/$USER/.config/pianobar/test2.txt\n".format(self.info))
+
         return self.info
 
     def send_notification(self,title="", body="", subtitle=None, message=None, image_url=None):
