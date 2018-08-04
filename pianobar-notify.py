@@ -115,7 +115,11 @@ class Pianobar_Notifier():
         self.title = self.info['title']
         self.album = self.info['album']
         self.image_url = self.info['coverArt']
-        self.station = self.info['stationName']
+        try:
+            self.station = self.info['songStationName']
+        except KeyError:
+            self.station = self.info['stationName']
+        
         try:
             self.duration = self.info['duration']
         except KeyError as e:
