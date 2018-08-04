@@ -1,2 +1,28 @@
-# pianobar-notify
-Add in some simple notifications for pianobar
+# Dependencies
+
+This obviously uses pianobar. If you're not using pianobar, why are you here?
+> brew install pianobar
+
+To get the notification to work smoothly with OS X, I considered a few options. 
+The `ntfy` project seemed pretty good, but it didn't have obvious support for passing an image URL in, so I have left it behind. It isn't hard to add it back in, if you really want.
+
+In the end, I found a small Ruby package called `terminal-notifier` which you can install with brew as well
+
+`brew install terminal-notifier`
+
+Then, I use [a handy python binding](https://github.com/looking-for-a-job/terminal-notifier.py) that sits on top of this:
+
+`pip install terminal-notifier`
+
+Then to get the whole thing to work, clone this repo somewhere, and copy the pianobar-notify.py into `~/.config/pianobar`.
+
+> cd ~/ext
+> clone github.com/sjmeijer/pianobar-notify
+> cp pianobar-notify.py ~/.config/pianobar
+
+Then the last thing you should need to do is copy this into your config file (which may not exist if you haven't poked around with pianobar before)
+> echo "event_command = /Users/$USER/.config/pianobar/pianobar-notify.py" >> /Users/$USER/.config/pianobar/config
+
+# License
+
+This code is vageuly inspired by [pianobar-growl](https://github.com/sorin-ionescu/pianobar-growl).
