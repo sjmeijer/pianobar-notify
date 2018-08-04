@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import terminal_notifier as tn
-import ntfy
 import os, sys
 
 DEBUG = False
@@ -156,22 +155,15 @@ class Pianobar_Notifier():
         I sanitize the title and body because a weird song name could probably mess things up.
         """
 
-        if image_url is not None and message is not None:
-            try:
-                tn.notify(
-                    title=title, 
-                    subtitle=subtitle, 
-                    message=message,
-                    appIcon=image_url
-                    )
-            except:
-                pass
-        else:
-            try:
-                ntfy.notify(message=body,title=title)
-                # ntfy.notify(message=self.sanitize(body),title=self.sanitize(title))
-            except Exception as e:
-                print(e)
+        try:
+            tn.notify(
+                title=title, 
+                subtitle=subtitle, 
+                message=message,
+                appIcon=image_url
+                )
+        except Exception as e:
+            print(e)
         
     def sanitize(self,string):
         """
