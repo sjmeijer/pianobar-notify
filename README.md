@@ -1,7 +1,9 @@
 # Dependencies
 
-This obviously uses pianobar. If you're not using pianobar, why are you here?
-> brew install pianobar
+This obviously uses [pianobar](https://6xq.net/pianobar/). If you're not using pianobar, why are you here?
+```
+brew install pianobar
+```
 
 To get the notification to work smoothly with OS X, I considered a few options. 
 The `ntfy` project seemed pretty good, but it didn't have obvious support for passing an image URL in, so I have left it behind. It isn't hard to add it back in, if you really want.
